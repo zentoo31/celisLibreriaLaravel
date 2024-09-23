@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
 
-Route::get("/students", function () {
-   return "students list";
-});
+
+Route::get("/students", [UserController::class, 'index']);
