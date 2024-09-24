@@ -11,6 +11,7 @@ class Usuario extends Model
 
     protected $table = 'user';
     protected $fillable = [
+        'id',
         'nombre', 
         'correo', 
         'password', 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Str;
+
 class UserController extends Controller
 {
     public function index(){
@@ -31,10 +33,22 @@ class UserController extends Controller
                 'errors' => $validator->errors(),
                 'status' => 400
             ];
-            return response()->json($data, 500);
+            return response()->json($data, 400);
         }
 
-        
-        
+        $password = $request->password;
+        $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
+
+        $user = Usuario::create([
+            'id' => Str::uuid(),
+            'nombre' => $request->nombre,
+            'correo' => $request->correo,
+            'password' => $passwordHashed
+        ]);
+
+        return response()->json($user, 200);    
     }
+
+    
+
 }
