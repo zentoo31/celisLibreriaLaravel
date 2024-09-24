@@ -6,4 +6,4 @@ use App\Http\Controllers\UserController;
 
 
 Route::get("/users", [UserController::class, 'index']);
-Route::post('/users', [UserController::class, 'createUser']);
+Route::post('/user/register', [UserController::class, 'createUser']);

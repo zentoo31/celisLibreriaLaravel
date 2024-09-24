@@ -39,14 +39,14 @@ class UserController extends Controller
         $password = $request->password;
         $passwordHashed = password_hash($password, PASSWORD_BCRYPT);
 
-        $user = Usuario::create([
+        Usuario::create([
             'id' => Str::uuid(),
             'nombre' => $request->nombre,
             'correo' => $request->correo,
             'password' => $passwordHashed
         ]);
 
-        return response()->json($user, 200);    
+        return response()->json(true, 201);    
     }
 
     
