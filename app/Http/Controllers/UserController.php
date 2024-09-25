@@ -9,17 +9,6 @@ use Illuminate\Support\Str;
 
 class UserController extends Controller
 {
-    public function index(){
-        $users = Usuario::all();
-
-        $data = [
-            'usuarios' => $users,
-            'status' => 200
-        ];
-
-        return response() -> json($data, 200);
-    }
-
     public function createUser(Request $request){
         $validator  = Validator::make($request -> all(),[
             'nombre' => 'required|string',
