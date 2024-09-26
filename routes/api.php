@@ -1,9 +1,10 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\AuthController;
 
-Route::post('/user/register', [UserController::class, 'registerUser']);
-Route::post('/user/login', [UserController::class, 'loginUser']);
+Route::post('/auth/register', [AuthController::class, 'register']);
+Route::post('/auth/login', [AuthController::class, 'login']);
+Route::post('/auth/logout', [AuthController::class, 'logout']);
 Route::get('/user/get-info', [UserController::class, 'getUserInfo']);
