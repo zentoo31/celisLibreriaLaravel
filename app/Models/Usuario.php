@@ -2,14 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-
-class Usuario extends Model
+use Tymon\JWTAuth\Contracts\JWTSubject;
+class Usuario extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
 
-    protected $table = 'user';
+    protected $table = 'user'; 
+
     protected $fillable = [
         'id',
         'nombre', 
@@ -18,4 +18,19 @@ class Usuario extends Model
         'role_id'
     ];
 
+    protected $hidden = [
+        'password', 
+    ];
+
+    use HasFactory;
+
+    public function getJWTIdentifier()
+    {
+        return $this->getKey();
+    }
+
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }
 }
