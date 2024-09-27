@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 class UserController extends Controller
 {
-    public function getUserInfo(Request $request) {
+    public function getUserInfo() {
         $user = JWTAuth::parseToken()->authenticate();
         if (!$user) {
             $data = [

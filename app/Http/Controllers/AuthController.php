@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Facades\JWTAuth;
-
+use Illuminate\Support\Facades\Cookie;
 class AuthController extends Controller
 {
     public function register(Request $request){
@@ -46,7 +46,7 @@ class AuthController extends Controller
             return response()->json(['message' => 'Credenciales inválidas'], 401);
         }
     
-        $cookie = cookie('auth_token', $token, 120);
+        $cookie = cookie('auth_token', $token, 120, null, null, false, true);
         return response()->json(['message' => 'Inicio de sesión exitoso'], 200)->withCookie($cookie);
     }
 
@@ -55,5 +55,11 @@ class AuthController extends Controller
         return response()->json(['message' => 'Cierre de sesión exitoso'], 200)->withCookie($cookie);
     }
 
+    public function isLogged(Request $request){
+        if (Cookie::get('auth_token')) {
+            return response()->json(true, 200);
+        }
+        return response()->json(false, 200);
+    }
 
 }
